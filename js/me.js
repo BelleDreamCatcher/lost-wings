@@ -146,22 +146,41 @@
   LW.views.settingsData = function () {
     return `${LW.back('#/me', 'Me')}<h1>My data</h1>
       <div class="note">🔒 Everything you put in Lost Wings is stored only on this device, in this browser. Nothing is sent anywhere. That also means if you delete the app or clear your browser data, it's gone, so back up now and then.</div>
-      <button class="btn" data-act="exportData">Back up (download a file)</button>
+      <button class="btn" data-act="exportData">Back up now</button>
+      <p class="tiny">On iPhone, choose <b>Save to Files</b>, then pick a folder in <b>iCloud Drive</b> (for example a "Lost Wings" folder). ${LW.state.meta.lastBackup ? `Last backed up ${LW.fmtDate(LW.state.meta.lastBackup, { day: 'numeric', month: 'long', year: 'numeric' })}.` : "You haven't backed up yet."}</p>
       <label class="btn g" style="cursor:pointer">Restore from a backup<input type="file" accept="application/json,.json" id="import-file" data-change="importData" hidden></label>
+      <p class="tiny">This opens Files, so you can pick your backup straight from iCloud Drive.</p>
       <h2>Start fresh</h2>
       <button class="btn danger" data-act="resetData">Delete everything and start again</button>`;
   };
-  A.exportData = () => {
-    const blob = new Blob([JSON.stringify(LW.state, null, 2)], { type: 'application/json' });
+  A.exportData = async () => {
+    const name = `lost-wings-backup-${LW.today()}.json`;
+    const json = JSON.stringify(LW.state, null, 2);
+    // On iPhone/iPad this opens the Share sheet, where "Save to Files" lets you pick any iCloud Drive folder
+    try {
+      const file = new File([json], name, { type: 'application/json' });
+      if (navigator.canShare && navigator.canShare({ files: [file] })) {
+        await navigator.share({ files: [file], title: 'Lost Wings backup' });
+        LW.state.meta.lastBackup = LW.today();
+        LW.refresh();
+        return;
+      }
+    } catch (e) {
+      if (e && e.name === 'AbortError') return; // closed the Share sheet
+    }
+    // Fallback (computers, older browsers): normal download
+    const blob = new Blob([json], { type: 'application/json' });
     const a = document.createElement('a');
     a.href = URL.createObjectURL(blob);
-    a.download = `lost-wings-backup-${LW.today()}.json`;
+    a.download = name;
     document.body.appendChild(a);
     a.click();
     setTimeout(() => {
       URL.revokeObjectURL(a.href);
       a.remove();
     }, 500);
+    LW.state.meta.lastBackup = LW.today();
+    LW.refresh();
   };
   A.importData = (d, el) => {
     const f = el.files && el.files[0];

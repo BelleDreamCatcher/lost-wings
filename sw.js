@@ -1,5 +1,5 @@
 /* Lost Wings service worker: caches the app so it opens offline. Bump VERSION when files change. */
-const VERSION = 'lost-wings-v1';
+const VERSION = 'lost-wings-v2';
 const FILES = [
   './',
   './index.html',

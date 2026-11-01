@@ -54,6 +54,10 @@ Then open http://localhost:8000.
 
 Open the app's address in **Safari**, tap **Share**, then **Add to Home Screen**. It gets the bunny icon, opens full screen, and works offline.
 
+## Backing up
+
+**Me → My data → Back up now.** On iPhone this opens the Share sheet: choose **Save to Files** and pick any iCloud Drive folder. **Restore from a backup** opens Files so you can pick the backup from iCloud Drive.
+
 ## Updating
 
 When you change any file, bump `VERSION` in `sw.js` (e.g. `lost-wings-v2`) so installed copies pick up the new version. If you add a new file, add it to the `FILES` list in `sw.js` too.
