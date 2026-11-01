@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en-GB">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Lost Wings</title>
+<meta name="description" content="Lost Wings companion app: gentle routines, wing checks, social energy and Chaos Bunny reports. Everything stays on your phone.">
+<meta name="theme-color" content="#f7f5fc">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="default">
+<meta name="apple-mobile-web-app-title" content="Lost Wings">
+<link rel="manifest" href="manifest.webmanifest">
+<link rel="icon" href="icons/icon.svg" type="image/svg+xml">
+<link rel="apple-touch-icon" href="icons/apple-touch-icon.png">
+<link rel="stylesheet" href="css/app.css">
+</head>
+<body>
+<div id="app">
+  <main id="view" tabindex="-1"></main>
+  <nav id="tabs" aria-label="Main"></nav>
+</div>
+<div id="sheet-wrap" hidden>
+  <div id="sheet-backdrop" data-act="closeSheet"></div>
+  <section id="sheet" role="dialog" aria-modal="true"></section>
+</div>
+<div id="toast" role="status" aria-live="polite"></div>
+<noscript>Lost Wings needs JavaScript switched on.</noscript>
+<script src="js/core.js"></script>
+<script src="js/today.js"></script>
+<script src="js/routines.js"></script>
+<script src="js/energy.js"></script>
+<script src="js/toolkit.js"></script>
+<script src="js/shame.js"></script>
+<script src="js/me.js"></script>
+<script src="js/app.js"></script>
+</body>
+</html>
