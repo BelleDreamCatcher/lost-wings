@@ -79,3 +79,7 @@ icons/                app icons
 ## A note on the shame journey
 
 The concept mockups recommend having a mental health professional review the shame journey wording and pause sheet before releasing it publicly. It's switched off by default. Crisis numbers aren't built in, because they vary by country; people add their own local contacts in the pause sheet.
+
+## Licence
+
+© 2026 Belle DreamCatcher. All rights reserved. The app is free to use, but the code and content may not be copied or reused without permission. See [LICENSE](LICENSE).
